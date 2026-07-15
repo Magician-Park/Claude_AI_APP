@@ -2,64 +2,41 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>농업 화물 배차 앱 - 핵심 화면 목업</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>팜카고 — 농업 화물 배차 데모</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        body {
-            font-family: 'Pretendard', sans-serif;
-            background-color: #e5e7eb;
-            margin: 0;
-            padding: 16px;
-            overflow-y: auto;
-            overflow-x: auto;
+        body { font-family: 'Pretendard', sans-serif; margin: 0; background: #111827;
+               display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .phone-frame { width: 390px; height: 800px; background: #f9fafb; border-radius: 40px;
+               border: 8px solid #1f2937; overflow: hidden; position: relative;
+               box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
+        @media (max-width: 480px), (max-height: 830px) {
+            body { align-items: stretch; }
+            .phone-frame { width: 100vw; max-width: 480px; height: 100dvh; border: none; border-radius: 0; margin: 0 auto; }
         }
-        .mobile-mockup {
-            width: 390px;
-            height: 800px;
-            background-color: #f9fafb;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            position: relative;
-            border: 8px solid #1f2937;
-            flex-shrink: 0;
-        }
+        .app-screen { display: none; position: absolute; inset: 0; background: #f9fafb; }
+        .app-screen.active { display: flex; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .screen-row { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
-        .screen-col { display: flex; flex-direction: column; gap: 12px; }
-        .screen-label {
-            font-size: 15px; font-weight: 700; color: #1f2937;
-            background: white; padding: 10px 18px; border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08); width: fit-content;
-        }
-        .screen-label .num {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 22px; height: 22px; border-radius: 50%;
-            background: #2563eb; color: white; font-size: 12px; margin-right: 8px;
-        }
+        #toast { position: absolute; bottom: 110px; left: 50%; transform: translateX(-50%);
+                 background: rgba(31,41,55,.92); color: #fff; font-size: 12px; font-weight: 700;
+                 padding: 10px 18px; border-radius: 999px; opacity: 0; transition: opacity .25s;
+                 pointer-events: none; z-index: 50; white-space: nowrap; }
     </style>
     <script>
-        tailwind.config = {
-            theme: { extend: { colors: { brand: {
-                50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8'
-            } } } }
-        }
+        tailwind.config = { theme: { extend: { colors: { brand: {
+            50:'#eff6ff',100:'#dbeafe',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8' } } } } }
     </script>
 </head>
 <body>
-
-<div class="screen-row">
-
-    <!-- ============================================================ -->
-    <!-- 화면 1 : 최초 실행 — 역할 선택 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-onboarding">
-        <div class="screen-label"><span class="num">1</span>최초 실행 — 역할 선택 + 간편 시작</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="phone-frame">
+<div class="app-screen flex-col" id="screen-onboarding">
             <main class="flex-1 flex flex-col px-6 pt-16 pb-8">
                 <!-- 로고 -->
                 <div class="flex flex-col items-center mb-10">
@@ -105,14 +82,8 @@
                 </div>
             </main>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 2 : 화주 회원가입 (최소 입력) -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-signup-shipper">
-        <div class="screen-label"><span class="num">2</span>화주 회원가입 — 3개 입력이면 끝</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-signup-shipper">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">회원가입 <span class="text-sm font-medium text-gray-400">· 화주</span></h1>
@@ -177,14 +148,8 @@
                 <p class="text-center text-[10px] text-gray-400">가입이 어려우시면 전화 주세요 — <b class="text-green-600">1588-0000</b> 대신 가입해 드려요</p>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 3 : 차주 회원가입 (본인인증) -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-driver-identity">
-        <div class="screen-label"><span class="num">3</span>차주 본인인증 — 실명 + 자격 자동 조회</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-driver-identity">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">회원가입 <span class="text-sm font-medium text-gray-400">· 차주</span></h1>
@@ -271,14 +236,8 @@
                 <button class="w-full bg-brand-600 text-white rounded-2xl py-4 font-bold text-base">인증 완료하고 서류 제출로</button>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 4 : 차주 회원가입 (서류 제출·심사) -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-signup-driver">
-        <div class="screen-label"><span class="num">4</span>차주 회원가입 — 자격 서류 + 심사</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-signup-driver">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">회원가입 <span class="text-sm font-medium text-gray-400">· 차주</span></h1>
@@ -367,14 +326,8 @@
                 <button class="w-full bg-brand-600 text-white rounded-2xl py-4 font-bold text-base">서류 제출하고 심사 받기 (2/4 남음)</button>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 4 : 차주 홈 로비 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen0">
-        <div class="screen-label"><span class="num">5</span>차주 홈 로비 — 차량 상태 + 맞춤 오더</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen0">
             <!-- 상단 헤더 -->
             <header class="bg-white px-6 pt-10 pb-4 rounded-b-3xl shadow-sm z-10">
                 <div class="flex justify-between items-center mb-3">
@@ -525,14 +478,8 @@
                 </a>
             </nav>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 2 : 화주(농가) 홈 로비 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-shipper-lobby">
-        <div class="screen-label"><span class="num">6</span>화주 홈 로비 — 큰 버튼 + 진행 오더 한눈에</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-shipper-lobby">
             <!-- 상단 헤더 -->
             <header class="bg-white px-6 pt-10 pb-5 rounded-b-3xl shadow-sm z-10">
                 <div class="flex justify-between items-center">
@@ -644,14 +591,8 @@
                 </a>
             </nav>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 3 : 화주 내 오더 목록 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-shipper-orders">
-        <div class="screen-label"><span class="num">7</span>화주 내 오더 — 상태별 목록 + 배차 지연 대응</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-shipper-orders">
             <header class="bg-white px-6 pt-10 pb-3 shadow-sm z-10">
                 <h1 class="text-lg font-bold text-gray-800 mb-3">내 오더</h1>
                 <!-- 상태 필터 탭 -->
@@ -741,14 +682,8 @@
                 </a>
             </nav>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 4 : 화주(농가) 오더 등록 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen1">
-        <div class="screen-label"><span class="num">8</span>화주 오더 등록 — 농업 특화 필드</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen1">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">운송 요청하기</h1>
@@ -880,14 +815,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 5 : 차주 오더 상세 (곡물) -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen2">
-        <div class="screen-label"><span class="num">9</span>차주 오더 상세 — 운임 투명성 + 회차 매칭</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen2">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">오더 상세</h1>
@@ -957,14 +886,8 @@
                 <button class="w-full bg-brand-600 text-white rounded-2xl py-4 font-bold text-lg">이 오더 수락하기</button>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 6 : 운송 진행 + 전자 인수증 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen3">
-        <div class="screen-label"><span class="num">10</span>운송 진행 — 상태 추적 + 전자 인수증</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen3">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">운송 진행 중</h1>
@@ -1032,14 +955,8 @@
                 </div>
             </main>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 7 : 정산 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen4">
-        <div class="screen-label"><span class="num">11</span>정산 — 빠른 지급 + 수수료 투명성</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen4">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">정산 내역</h1>
@@ -1096,14 +1013,8 @@
                 </div>
             </main>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 8 : 화주(축산농가) 오더 등록 — 퇴비·축분 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen5">
-        <div class="screen-label"><span class="num">12</span>화주 오더 등록 — 퇴비·축분 (오염 화물)</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen5">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">운송 요청하기</h1>
@@ -1206,14 +1117,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 9 : 차주 오더 상세 — 퇴비·축분 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen6">
-        <div class="screen-label"><span class="num">13</span>차주 오더 상세 — 퇴비 이력 경고 + 톤당 정산</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen6">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">오더 상세</h1>
@@ -1282,14 +1187,8 @@
                 <button class="w-full bg-amber-700 text-white rounded-2xl py-4 font-bold text-lg">이력 기록 동의하고 수락하기</button>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================ -->
-    <!-- 화면 10 : 차주 차량 설정 — 운송 가능 화물 관리 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-vehicle-settings">
-        <div class="screen-label"><span class="num">14</span>차주 차량 설정 — 운송 가능 화물 (LMO·위험물)</div>
-        <div class="mobile-mockup flex flex-col">
+<div class="app-screen flex-col" id="screen-vehicle-settings">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">내 차량 설정</h1>
@@ -1419,9 +1318,105 @@
                 </a>
             </nav>
         </div>
-    </div>
-
+<div id="toast"></div>
 </div>
 
+<script>
+const stack = ['screen-onboarding'];
+let role = 'shipper';
+const DRIVER_SCREENS = ['screen-driver-identity','screen-signup-driver','screen0','screen2','screen3','screen4','screen5x','screen6','screen-vehicle-settings'];
+
+function show(id) {
+    document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    const main = el.querySelector('main'); if (main) main.scrollTop = 0;
+}
+function go(id) { stack.push(id); show(id); }
+function back() { if (stack.length > 1) { stack.pop(); show(stack[stack.length-1]); } }
+let toastTimer;
+function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.style.opacity = 1;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.style.opacity = 0, 1600);
+}
+function selectRole(idx) {
+    const cards = document.querySelectorAll('#screen-onboarding main > button');
+    cards.forEach((b, j) => {
+        if (j === idx) {
+            b.className = b.className.replace('bg-white border border-gray-200', 'bg-brand-50 border-2 border-brand-500');
+            b.lastElementChild.outerHTML = '<i class="fa-solid fa-circle-check text-brand-600 text-xl"></i>';
+        } else {
+            b.className = b.className.replace('bg-brand-50 border-2 border-brand-500', 'bg-white border border-gray-200');
+            b.lastElementChild.outerHTML = '<div class="w-5 h-5 rounded-full border-2 border-gray-200"></div>';
+        }
+    });
+    role = idx === 0 ? 'shipper' : 'driver';
+}
+
+document.addEventListener('click', e => {
+    const scr = e.target.closest('.app-screen');
+    if (!scr) return;
+    const sid = scr.id;
+
+    // 뒤로가기 화살표
+    if (e.target.closest('header') && e.target.classList.contains('fa-arrow-left')) { back(); return; }
+
+    const btn = e.target.closest('button, a');
+    if (btn) {
+        const x = btn.innerText.replace(/\s+/g, '');
+
+        if (sid === 'screen-onboarding') {
+            if (x.includes('짐을보내요')) { selectRole(0); return; }
+            if (x.includes('화물차로운송해요')) { selectRole(1); return; }
+            if (x.includes('시작')) { go(role === 'shipper' ? 'screen-signup-shipper' : 'screen-driver-identity'); return; }
+        }
+        if (x.includes('가입완료하고시작하기')) { go('screen-shipper-lobby'); return; }
+        if (x.includes('인증완료하고서류제출로') || x.includes('PASS앱으로한번에인증')) { go('screen-signup-driver'); return; }
+        if (x.includes('서류제출하고심사받기')) { toast('심사 통과! 데모라서 바로 시작해요 🎉'); setTimeout(() => go('screen0'), 900); return; }
+        if (x.includes('내주변실시간오더찾기')) { go('screen2'); return; }
+        if (x.includes('이오더수락하기')) { go('screen3'); return; }
+        if (x.includes('이력기록동의하고수락하기')) { go('screen3'); return; }
+        if (sid === 'screen-shipper-lobby' && x.includes('운송요청하기')) { go('screen1'); return; }
+        if (sid === 'screen1' && x.includes('요청하기') && !x.includes('운송')) { toast('오더가 등록됐어요 — 차주를 찾는 중'); setTimeout(() => go('screen-shipper-orders'), 900); return; }
+        if (sid === 'screen5' && x.includes('요청하기')) { toast('오더가 등록됐어요 — 차주를 찾는 중'); setTimeout(() => go('screen-shipper-orders'), 900); return; }
+        if (sid === 'screen1' && x.includes('퇴비·축분')) { go('screen5'); return; }
+        if (sid === 'screen5' && x.includes('곡물(벼·쌀)')) { go('screen1'); return; }
+
+        // 하단 네비게이션 (a 태그)
+        if (btn.tagName === 'A') {
+            const nav = btn.innerText.trim();
+            const driverCtx = ['screen0','screen4','screen-vehicle-settings'].includes(sid);
+            if (nav === '홈') { go(driverCtx ? 'screen0' : 'screen-shipper-lobby'); return; }
+            if (nav === '오더목록') { go('screen2'); return; }
+            if (nav === '정산내역') { go('screen4'); return; }
+            if (nav === '내 오더') { go('screen-shipper-orders'); return; }
+            if (nav === '운송비') { go('screen4'); return; }
+            if (nav === '내 정보') { go(driverCtx ? 'screen-vehicle-settings' : 'screen-shipper-lobby'); return; }
+        }
+
+        if (x.includes('전화') || x.includes('카카오')) { toast('데모에서는 연결되지 않아요 📞'); return; }
+        return; // 폼 칩 등은 조용히 무시
+    }
+
+    // 차주 로비 추천 오더 카드
+    if (sid === 'screen0') {
+        const card = e.target.closest('div.bg-white.rounded-2xl');
+        if (card) {
+            const tx = card.innerText;
+            if (tx.includes('바로 상차')) { go('screen2'); return; }
+            if (tx.includes('이력 기록됨')) { go('screen6'); return; }
+        }
+    }
+    // 화주 로비 진행중 카드 → 내 오더
+    if (sid === 'screen-shipper-lobby') {
+        const card = e.target.closest('div.bg-white.rounded-2xl');
+        if (card && (card.innerText.includes('운송 중') || card.innerText.includes('배차 대기'))) { go('screen-shipper-orders'); return; }
+    }
+});
+
+show('screen-onboarding');
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(() => {}); }
+</script>
 </body>
 </html>
