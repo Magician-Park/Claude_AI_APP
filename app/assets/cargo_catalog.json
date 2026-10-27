@@ -1,0 +1,287 @@
+{
+  "categories": [
+    {
+      "id": "compound-feed",
+      "name": "배합사료",
+      "description": "축종과 성장 단계에 맞는 배합사료 완제품",
+      "suppliers": [
+        {
+          "id": "farmsco",
+          "name": "팜스코",
+          "description": "전 축종 종합 배합사료",
+          "locations": [
+            "안성",
+            "정읍",
+            "칠곡",
+            "보령",
+            "제주"
+          ],
+          "groups": [
+            {
+              "id": "pig",
+              "name": "양돈 사료",
+              "products": [
+                {
+                  "name": "자돈용 배합사료"
+                },
+                {
+                  "name": "모돈용 배합사료"
+                },
+                {
+                  "name": "비육돈용 배합사료"
+                }
+              ]
+            },
+            {
+              "id": "cattle",
+              "name": "축우 사료 · 비육·낙농",
+              "products": [
+                {
+                  "name": "한우 비육사료 · 맥스나인"
+                },
+                {
+                  "name": "한우 비육사료 · 쇠죽이 명작"
+                },
+                {
+                  "name": "낙농 착유사료"
+                },
+                {
+                  "name": "어린송아지 사료"
+                }
+              ]
+            },
+            {
+              "id": "poultry",
+              "name": "양계·오리 사료",
+              "products": [
+                {
+                  "name": "산란계 · 골드탑 시리즈"
+                },
+                {
+                  "name": "산란계 · 맥스가드"
+                },
+                {
+                  "name": "육계 · 쑥쑥 시리즈"
+                },
+                {
+                  "name": "육용종계 사료"
+                },
+                {
+                  "name": "오리 · 골드덕 시리즈"
+                }
+              ]
+            },
+            {
+              "id": "other-feed",
+              "name": "기타 사료",
+              "products": [
+                {
+                  "name": "말 사료 · 홀스나인"
+                },
+                {
+                  "name": "펫푸드 · 반려동물 사료"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sunjin-gunsan",
+          "name": "선진 군산공장",
+          "description": "가루·펠릿·후레이크·크럼블 등 가공사료 · 품목별 출하 형태 확인",
+          "locations": [
+            "군산"
+          ],
+          "groups": [
+            {
+              "id": "cattle",
+              "name": "축우 사료 · 한우·육우·낙농",
+              "products": [
+                {
+                  "name": "한우 번식우 · 원포유 진/수"
+                },
+                {
+                  "name": "육우 · 파워플INNO"
+                },
+                {
+                  "name": "낙농 착유사료 · 뉴보스 수/진"
+                },
+                {
+                  "name": "로봇착유기 전용 · 로보스M3"
+                }
+              ]
+            },
+            {
+              "id": "pig",
+              "name": "양돈 사료",
+              "products": [
+                {
+                  "name": "자돈용 · 빅굿VIP"
+                },
+                {
+                  "name": "성장 단계별 양돈 사료"
+                }
+              ]
+            },
+            {
+              "id": "poultry",
+              "name": "양계 사료",
+              "products": [
+                {
+                  "name": "양계용 배합사료"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feed-ingredients",
+      "name": "원료·첨가제",
+      "description": "배합사료에 사용하는 아미노산과 당류 원료",
+      "suppliers": [
+        {
+          "id": "daesang-gunsan",
+          "name": "대상 군산공장",
+          "description": "사료용 첨가제·원료 생산 · 배합사료 완제품과 구분",
+          "locations": [
+            "군산"
+          ],
+          "groups": [
+            {
+              "id": "amino-acids",
+              "name": "사료용 아미노산",
+              "products": [
+                {
+                  "name": "L-라이신 · 염산염"
+                },
+                {
+                  "name": "L-라이신 · 황산염"
+                },
+                {
+                  "name": "L-라이신 · 액상",
+                  "note": "액상 원료: 포장·탱크 출하 형태를 확인해 주세요."
+                },
+                {
+                  "name": "L-아르지닌"
+                },
+                {
+                  "name": "L-히스티딘"
+                },
+                {
+                  "name": "L-트레오닌"
+                },
+                {
+                  "name": "L-트립토판"
+                }
+              ]
+            },
+            {
+              "id": "sugars",
+              "name": "사료용 당류",
+              "note": "미생물 영양원 및 사료 부형제로 사용하는 원료입니다.",
+              "products": [
+                {
+                  "name": "함수결정포도당"
+                },
+                {
+                  "name": "무수결정포도당"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food-milling",
+      "name": "식품 원료·제분 부산물",
+      "description": "밀가루·프리믹스 등 식품 원료와 사료 원료로 출하하는 제분 부산물",
+      "suppliers": [
+        {
+          "id": "samyang-asan",
+          "name": "삼양사 아산공장",
+          "description": "밀가루·프리믹스 생산 및 제분 부산물 출하",
+          "locations": [
+            "아산"
+          ],
+          "groups": [
+            {
+              "id": "flour-premix",
+              "name": "식품 · 밀가루·프리믹스",
+              "products": [
+                {
+                  "name": "큐원 밀가루"
+                },
+                {
+                  "name": "홈메이드 프리믹스 · 호떡 믹스"
+                },
+                {
+                  "name": "홈메이드 프리믹스 · 쿠키 믹스"
+                }
+              ]
+            },
+            {
+              "id": "wheat-bran",
+              "name": "제분 부산물 · 사료 원료",
+              "note": "소맥피는 밀가루 제분 과정에서 발생한 밀 껍질로, 축우·양돈용 배합사료 원료로 출하합니다.",
+              "products": [
+                {
+                  "name": "소맥피 · 밀 껍질"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "spc",
+          "name": "SPC",
+          "description": "SPC 납품용 밀가루 등 제빵 원료 · 실제 상차지와 SPC 납품 거점을 구분해 입력합니다.",
+          "locations": [],
+          "groups": [
+            {
+              "id": "bakery-ingredients",
+              "name": "제빵 원료 납품",
+              "note": "완제품 식품 배송이 아닌 SPC 생산 거점으로의 원료 납품입니다.",
+              "products": [
+                {
+                  "name": "밀가루"
+                },
+                {
+                  "name": "기타 제빵 원료 · 직접 입력",
+                  "requiresDetails": true
+                }
+              ]
+            }
+          ],
+          "role": "recipient"
+        }
+      ]
+    },
+    {
+      "id": "agricultural-raw",
+      "name": "농산 원물",
+      "description": "국내 농가에서 출하하는 농산 원물",
+      "suppliers": [
+        {
+          "id": "domestic-tobacco",
+          "name": "국산 담뱃잎",
+          "description": "가공 담배 제품과 구분한 국내산 잎 원물 · 출하자·상차지 직접 입력",
+          "locations": [],
+          "groups": [
+            {
+              "id": "tobacco-leaf",
+              "name": "담뱃잎",
+              "products": [
+                {
+                  "name": "국산 담뱃잎"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
