@@ -49,6 +49,8 @@
             } } } }
         }
     </script>
+    <link rel="stylesheet" href="transport-categories.css">
+    <script src="transport-categories.js" defer></script>
 </head>
 <body>
 
@@ -747,123 +749,79 @@
     <!-- 화면 4 : 화주(농가) 오더 등록 -->
     <!-- ============================================================ -->
     <div class="screen-col" id="screen1">
-        <div class="screen-label"><span class="num">8</span>화주 오더 등록 — 농업 특화 필드</div>
-        <div class="mobile-mockup flex flex-col">
+        <div class="screen-label"><span class="num">8</span>화주 오더 등록 — 화물 종류·출하 업체·세부 품목</div>
+        <div class="mobile-mockup flex flex-col" data-request-form>
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
                 <h1 class="text-lg font-bold text-gray-800">운송 요청하기</h1>
             </header>
             <main class="flex-1 overflow-y-auto hide-scrollbar px-6 py-5 pb-32">
 
-                <!-- 품목 선택 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">무엇을 보내시나요?</p>
-                <div class="flex flex-wrap gap-2 mb-2">
-                    <button class="px-4 py-2.5 bg-brand-600 text-white rounded-xl text-sm font-bold">🌾 곡물(벼·쌀)</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">💩 퇴비·축분</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">🧪 비료</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">🐄 사료</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">📦 농자재</button>
-                </div>
-
-                <!-- 식용 여부 → 교차오염 필터 -->
-                <div class="flex items-center justify-between bg-amber-50 border border-amber-200 rounded-xl p-3.5 mb-5">
-                    <div class="flex-1 pr-2">
-                        <p class="text-sm font-bold text-amber-800">식용 화물입니다</p>
-                        <p class="text-xs text-amber-700 mt-0.5">퇴비·축분 운반 이력 차량은 자동 제외됩니다</p>
-                    </div>
-                    <div class="w-11 h-6 bg-amber-500 rounded-full relative flex-shrink-0">
-                        <div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div>
-                    </div>
-                </div>
-
-                <!-- 곡물 구분 (일반/LMO/친환경) -->
-                <p class="text-sm font-bold text-gray-700 mb-2">곡물 구분</p>
-                <div class="flex gap-2 mb-1.5">
-                    <button class="flex-1 py-2.5 bg-brand-50 border-2 border-brand-500 rounded-xl text-xs font-bold text-brand-700">일반 곡물</button>
-                    <button class="flex-1 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">LMO (유전자변형)</button>
-                    <button class="flex-1 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">친환경 인증</button>
-                </div>
-                <p class="text-xs text-gray-400 mb-5"><i class="fa-solid fa-circle-info mr-1"></i>LMO 곡물은 운송 승인을 받은 차량만 매칭됩니다</p>
+                <section data-transport-categories aria-label="운송 화물 분류"><p>화물 분류를 불러오는 중입니다.</p></section>
 
                 <!-- 적재 형태 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">어떻게 실려 있나요?</p>
-                <div class="grid grid-cols-4 gap-2 mb-5">
-                    <button class="flex flex-col items-center gap-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl">
+                <p class="text-sm font-bold text-gray-700 mb-2">포장·출하 형태</p>
+                <div class="grid grid-cols-5 gap-2 mb-5">
+                    <button data-grain-package="톤백" class="flex flex-col items-center gap-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl">
                         <i class="fa-solid fa-sack-xmark text-brand-600"></i>
                         <span class="text-xs font-bold text-brand-700">톤백</span>
                     </button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
+                    <button data-grain-package="벌크" class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
                         <i class="fa-solid fa-mound text-gray-400"></i>
                         <span class="text-xs text-gray-500">벌크</span>
                     </button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
+                    <button data-grain-package="파렛트" class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
                         <i class="fa-solid fa-pallet text-gray-400"></i>
                         <span class="text-xs text-gray-500">파렛트</span>
                     </button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
+                    <button data-grain-package="포대" class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
                         <i class="fa-solid fa-bag-shopping text-gray-400"></i>
                         <span class="text-xs text-gray-500">포대</span>
                     </button>
+                    <button data-grain-package="액상" class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
+                        <i class="fa-solid fa-droplet text-gray-400"></i><span class="text-xs text-gray-500">액상</span>
+                    </button>
                 </div>
 
-                <!-- 상차지: 지도 핀 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">상차지 (주소가 없어도 괜찮아요)</p>
-                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden mb-3">
-                    <div class="h-28 bg-gradient-to-br from-green-100 to-green-200 relative flex items-center justify-center">
-                        <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, #86efac 0 2px, transparent 2px 20px);"></div>
-                        <i class="fa-solid fa-location-dot text-red-500 text-3xl drop-shadow"></i>
-                        <span class="absolute bottom-2 right-3 text-[10px] bg-white/80 px-2 py-0.5 rounded-full text-gray-600">지도에서 핀으로 지정됨</span>
-                    </div>
-                    <div class="p-3.5">
-                        <p class="text-sm font-bold text-gray-800">전북 김제시 죽산면 ○○리 앞 농로</p>
-                        <!-- 지역 진입 톤수 제한 -->
-                        <div class="mt-2.5 bg-amber-50 border border-amber-200 rounded-xl p-3">
-                            <div class="flex items-center justify-between mb-2">
-                                <p class="text-xs font-bold text-amber-800"><i class="fa-solid fa-road-barrier mr-1"></i>이 지역 진입 가능 톤수</p>
-                                <span class="text-[10px] text-amber-600">도로폭·교량 기준 자동 분석</span>
-                            </div>
-                            <div class="flex gap-1.5">
-                                <button class="flex-1 py-2 bg-white border border-amber-200 rounded-lg text-xs text-gray-500">3.5톤</button>
-                                <button class="flex-1 py-2 bg-amber-500 text-white rounded-lg text-xs font-bold">5톤까지</button>
-                                <button class="flex-1 py-2 bg-white border border-amber-200 rounded-lg text-xs text-gray-400">8톤</button>
-                                <button class="flex-1 py-2 bg-white border border-amber-200 rounded-lg text-xs text-gray-400">제한 없음</button>
-                            </div>
-                            <p class="text-[10px] text-amber-700 mt-1.5">길을 잘 아시면 직접 바꿀 수 있어요 — 아래 차량 톤수 선택에 자동 반영됩니다</p>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-2xl border border-gray-200 p-4 mb-5">
+                    <p class="text-sm font-bold text-gray-700">상차지</p>
+                    <p data-transport-origin class="text-xs text-gray-500 mt-2">출하 거점을 먼저 선택해 주세요.</p>
+                    <label class="block text-sm font-bold text-gray-700 mt-4">하차지
+                        <input data-transport-destination class="block w-full border border-gray-200 rounded-xl px-3 py-3 text-sm font-normal mt-2" placeholder="도착할 주소나 거점명을 입력해 주세요" maxlength="200" required>
+                    </label>
                 </div>
 
                 <!-- 상하차 장비 -->
                 <p class="text-sm font-bold text-gray-700 mb-2">상차 장비가 있나요?</p>
                 <div class="flex gap-2 mb-5">
-                    <button class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">지게차 있음</button>
-                    <button class="flex-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl text-sm font-bold text-brand-700">없음·크레인</button>
-                    <button class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">수작업</button>
+                    <button data-grain-equipment="forklift" aria-pressed="false" class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">지게차 있음</button>
+                    <button data-grain-equipment="crane" aria-pressed="true" class="flex-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl text-sm font-bold text-brand-700">없음·크레인</button>
+                    <button data-grain-equipment="manual" aria-pressed="false" class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">수작업</button>
                 </div>
 
                 <!-- 차량 구분 -->
                 <p class="text-sm font-bold text-gray-700 mb-2">어떤 차량이 필요한가요?</p>
                 <div class="flex gap-2 mb-3">
-                    <button class="flex-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl text-sm font-bold text-brand-700"><i class="fa-solid fa-truck mr-1"></i>일반 카고·윙바디</button>
-                    <button class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500"><i class="fa-solid fa-truck-monster mr-1"></i>특수 (덤프·탱크)</button>
+                    <button data-grain-vehicle="general" aria-pressed="true" class="flex-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl text-sm font-bold text-brand-700"><i class="fa-solid fa-truck mr-1"></i>일반 카고·윙바디</button>
+                    <button data-grain-vehicle="special" aria-pressed="false" class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500"><i class="fa-solid fa-truck-monster mr-1"></i>특수 (덤프·탱크)</button>
                 </div>
                 <!-- 톤수 선택 -->
                 <div class="grid grid-cols-5 gap-1.5 mb-2">
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">1톤</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">2.5톤</button>
-                    <button class="py-2.5 bg-brand-50 border-2 border-brand-500 rounded-xl text-xs font-bold text-brand-700">5톤</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-400 line-through">11톤</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-400 line-through">25톤</button>
+                    <button data-grain-tonnage="1" aria-pressed="false" class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">1톤</button>
+                    <button data-grain-tonnage="2.5" aria-pressed="false" class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">2.5톤</button>
+                    <button data-grain-tonnage="5" aria-pressed="true" class="py-2.5 bg-brand-50 border-2 border-brand-500 rounded-xl text-xs font-bold text-brand-700">5톤</button>
+                    <button data-grain-tonnage="11" aria-pressed="false" class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">11톤</button>
+                    <button data-grain-tonnage="25" aria-pressed="false" class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">25톤</button>
                 </div>
-                <p class="text-xs text-brand-600 font-medium mb-5"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i>톤백 12개(약 4.8톤) + 농로 5톤 제한 → 5톤 카고를 추천해요</p>
+                <p id="grain-package-guide" class="text-xs text-brand-600 font-medium mb-5"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i><span>화물의 포장·차량 조건을 선택해 주세요.</span></p>
 
                 <!-- 예상 운임 -->
                 <div class="bg-gray-800 rounded-2xl p-4 text-white flex justify-between items-center">
                     <div>
-                        <p class="text-xs text-gray-400">예상 운임 (크레인 작업비 포함)</p>
-                        <p class="text-2xl font-bold mt-0.5">280,000<span class="text-sm font-medium">원</span></p>
+                        <p id="grain-quote-label" class="text-xs text-gray-400">예상 운임 (크레인 작업비 포함)</p>
+                        <p class="text-2xl font-bold mt-0.5"><span id="grain-price">280,000</span><span class="text-sm font-medium">원</span></p>
                     </div>
-                    <button class="bg-brand-500 px-5 py-3 rounded-xl font-bold text-sm">요청하기</button>
+                    <button data-submit-transport disabled class="bg-brand-500 px-5 py-3 rounded-xl font-bold text-sm">요청하기</button>
                 </div>
             </main>
 
@@ -879,117 +837,6 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 추가 화면 : 화주 비료 운송 요청 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-fertilizer-order">
-        <div class="screen-label"><span class="num">15</span>화주 오더 등록 — 비료 포장·안전·장비 맞춤</div>
-        <div class="mobile-mockup flex flex-col">
-            <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
-                <i class="fa-solid fa-arrow-left text-gray-500"></i>
-                <h1 class="text-lg font-bold text-gray-800">운송 요청하기 <span class="text-sm font-medium text-gray-400">· 비료</span></h1>
-            </header>
-            <main class="flex-1 overflow-y-auto hide-scrollbar px-6 py-5 pb-28">
-                <div class="flex items-center justify-between mb-2">
-                    <p class="text-sm font-bold text-gray-700">무엇을 보내시나요?</p>
-                    <span class="text-[10px] font-bold text-brand-600">1 / 4</span>
-                </div>
-                <div class="flex flex-wrap gap-2 mb-4">
-                    <button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">🌾 곡물</button>
-                    <button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">💩 퇴비</button>
-                    <button class="px-3 py-2.5 bg-brand-600 text-white rounded-xl text-xs font-bold">🧪 비료</button>
-                    <button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">🐄 사료</button>
-                </div>
-
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-3.5 mb-5">
-                    <p class="text-sm font-bold text-blue-800"><i class="fa-solid fa-circle-info mr-1"></i>포장과 장비에 맞는 차량을 찾아드려요</p>
-                    <p class="text-xs text-blue-700 mt-1">파렛트는 윙바디, 액상은 전용 탱크로리로 자동 추천됩니다.</p>
-                </div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">비료 종류</p>
-                <div class="grid grid-cols-2 gap-2 mb-1.5">
-                    <button class="py-2.5 bg-brand-50 border-2 border-brand-500 rounded-xl text-xs font-bold text-brand-700">복합비료</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">요소·질소질</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">유기질비료</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">토양개량제</button>
-                </div>
-                <p class="text-[10px] text-gray-400 mb-5">제품명·제조사는 요청 메모에 추가할 수 있어요</p>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">어떻게 포장되어 있나요?</p>
-                <div class="grid grid-cols-4 gap-2 mb-3">
-                    <button class="flex flex-col items-center gap-1 py-3 bg-brand-50 border-2 border-brand-500 rounded-xl"><i class="fa-solid fa-pallet text-brand-600"></i><span class="text-xs font-bold text-brand-700">파렛트</span></button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-solid fa-box text-gray-400"></i><span class="text-xs text-gray-500">톤백</span></button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-solid fa-bag-shopping text-gray-400"></i><span class="text-xs text-gray-500">포대</span></button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-solid fa-droplet text-gray-400"></i><span class="text-xs text-gray-500">액상</span></button>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-xl p-3.5 flex items-center mb-5">
-                    <span class="text-sm font-bold text-gray-700">수량</span>
-                    <div class="ml-auto flex items-center gap-4"><span class="w-8 h-8 bg-gray-100 rounded-full grid place-items-center">−</span><b>8개</b><span class="w-8 h-8 bg-brand-50 text-brand-600 rounded-full grid place-items-center">＋</span></div>
-                </div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">상·하차 장소와 장비</p>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-2">
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-circle text-brand-500 text-xs"></i><div class="flex-1"><p class="text-[10px] text-gray-400">상차지</p><p class="text-xs font-bold text-gray-800">전주 ○○비료 물류창고</p></div><i class="fa-solid fa-chevron-right text-gray-300"></i></div>
-                    <div class="mt-3 pt-3 border-t border-gray-100 flex items-center"><div class="flex-1"><p class="text-xs font-bold text-gray-700">지게차 있음</p><p class="text-[10px] text-gray-400">파렛트 상차 가능</p></div><div class="w-11 h-6 bg-brand-600 rounded-full relative"><div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-5">
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-red-500"></i><div class="flex-1"><p class="text-[10px] text-gray-400">하차지</p><p class="text-xs font-bold text-gray-800">김제시 죽산면 우리 농장</p></div><i class="fa-solid fa-chevron-right text-gray-300"></i></div>
-                    <div class="mt-3 pt-3 border-t border-gray-100 flex items-center"><div class="flex-1"><p class="text-xs font-bold text-gray-700">지게차 없음</p><p class="text-[10px] text-brand-600">리프트·크레인 차량 필요</p></div><div class="w-11 h-6 bg-gray-200 rounded-full relative"><div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div>
-                </div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">제품 안전 확인</p>
-                <div class="bg-green-50 border border-green-200 rounded-xl p-3.5 mb-5 flex gap-3">
-                    <div class="w-5 h-5 rounded-md bg-green-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-check text-white text-[10px]"></i></div>
-                    <div><p class="text-xs font-bold text-green-800">일반 비료임을 제품 라벨로 확인</p><p class="text-[10px] text-green-700 mt-1">위험물 표기가 있거나 모르면 담당자가 라벨·물질안전보건자료를 확인합니다.</p></div>
-                </div>
-
-                <div class="bg-gray-800 rounded-2xl p-4 text-white flex items-center gap-3">
-                    <i class="fa-solid fa-wand-magic-sparkles text-blue-300"></i>
-                    <div class="flex-1"><p class="text-sm font-bold">5톤 윙바디 · 리프트 추천</p><p class="text-[10px] text-gray-400">내일 오전 상차 · 예상 운임 190,000원</p></div>
-                </div>
-            </main>
-            <div class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-4 pt-3 pb-4 z-20">
-                <button class="w-full bg-brand-600 text-white rounded-2xl py-4 font-bold text-sm">이 조건으로 비료 운송 요청하기</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 추가 화면 : 화주 사료 운송 요청 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen-feed-order">
-        <div class="screen-label"><span class="num">16</span>화주 오더 등록 — 사료 오염 방지·농장 방역</div>
-        <div class="mobile-mockup flex flex-col">
-            <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3"><i class="fa-solid fa-arrow-left text-gray-500"></i><h1 class="text-lg font-bold text-gray-800">운송 요청하기 <span class="text-sm font-medium text-gray-400">· 사료</span></h1></header>
-            <main class="flex-1 overflow-y-auto hide-scrollbar px-6 py-5 pb-28">
-                <div class="flex items-center justify-between mb-2"><p class="text-sm font-bold text-gray-700">무엇을 보내시나요?</p><span class="text-[10px] font-bold text-green-600">1 / 4</span></div>
-                <div class="flex flex-wrap gap-2 mb-4"><button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">🌾 곡물</button><button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">💩 퇴비</button><button class="px-3 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-xs">🧪 비료</button><button class="px-3 py-2.5 bg-green-600 text-white rounded-xl text-xs font-bold">🐄 사료</button></div>
-
-                <div class="bg-green-50 border border-green-200 rounded-xl p-3.5 mb-5 flex gap-2.5"><i class="fa-solid fa-shield-heart text-green-700 mt-0.5"></i><div><p class="text-sm font-bold text-green-800">깨끗하고 건조한 차량만 매칭해요</p><p class="text-xs text-green-700 mt-1">퇴비·축분 이력 차량 제외 · 농장 방역 조건 확인</p></div></div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">사료 종류</p>
-                <div class="grid grid-cols-2 gap-2 mb-1.5"><button class="py-2.5 bg-green-50 border-2 border-green-500 rounded-xl text-xs font-bold text-green-700">배합사료</button><button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">조사료</button><button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">단미사료</button><button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">TMR 사료</button></div>
-                <p class="text-[10px] text-gray-400 mb-5">축종과 제품명은 요청 메모에 추가할 수 있어요</p>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">어떻게 실려 있나요?</p>
-                <div class="grid grid-cols-4 gap-2 mb-3"><button class="flex flex-col items-center gap-1 py-3 bg-green-50 border-2 border-green-500 rounded-xl"><i class="fa-solid fa-pallet text-green-600"></i><span class="text-[10px] font-bold text-green-700">파렛트 포대</span></button><button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-solid fa-box text-gray-400"></i><span class="text-xs text-gray-500">톤백</span></button><button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-solid fa-wheat-awn text-gray-400"></i><span class="text-[10px] text-gray-500">벌크 사일로</span></button><button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl"><i class="fa-regular fa-circle text-gray-400"></i><span class="text-[10px] text-gray-500">랩핑 곤포</span></button></div>
-                <div class="bg-white border border-gray-200 rounded-xl p-3.5 flex items-center mb-5"><span class="text-sm font-bold text-gray-700">수량</span><div class="ml-auto flex items-center gap-4"><span class="w-8 h-8 bg-gray-100 rounded-full grid place-items-center">−</span><b>10파렛트</b><span class="w-8 h-8 bg-green-50 text-green-600 rounded-full grid place-items-center">＋</span></div></div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">상·하차 장소와 장비</p>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-2"><div class="flex items-center gap-3"><i class="fa-solid fa-circle text-brand-500 text-xs"></i><div class="flex-1"><p class="text-[10px] text-gray-400">상차지</p><p class="text-xs font-bold text-gray-800">천안시 ○○사료 물류센터</p></div><i class="fa-solid fa-chevron-right text-gray-300"></i></div><div class="mt-3 pt-3 border-t border-gray-100 flex items-center"><div class="flex-1"><p class="text-xs font-bold text-gray-700">상차 지게차 있음</p><p class="text-[10px] text-gray-400">파렛트 상차 가능</p></div><div class="w-11 h-6 bg-green-600 rounded-full relative"><div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div></div>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-5"><div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-red-500"></i><div class="flex-1"><p class="text-[10px] text-gray-400">하차지</p><p class="text-xs font-bold text-gray-800">김제시 죽산면 한우 농장</p></div></div><div class="mt-3 pt-3 border-t border-gray-100 flex items-center"><div class="flex-1"><p class="text-xs font-bold text-gray-700">하차 지게차 없음</p><p class="text-[10px] text-green-700">리프트·크레인 차량 필요</p></div><div class="w-11 h-6 bg-gray-200 rounded-full relative"><div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div></div>
-
-                <p class="text-sm font-bold text-gray-700 mb-2">사료 보호·농장 방역</p>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-2 flex items-center"><i class="fa-solid fa-cloud-rain text-blue-500 mr-3"></i><div class="flex-1"><p class="text-xs font-bold text-gray-800">습기·빗물 차단 차량</p><p class="text-[10px] text-gray-400">윙바디·방수포 상태 확인</p></div><div class="w-11 h-6 bg-green-600 rounded-full relative"><div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div>
-                <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-2 flex items-center"><i class="fa-solid fa-spray-can-sparkles text-green-600 mr-3"></i><div class="flex-1"><p class="text-xs font-bold text-gray-800">차량 소독필증 필요</p><p class="text-[10px] text-gray-400">축산농장 진입 전 소독 완료 확인</p></div><div class="w-11 h-6 bg-green-600 rounded-full relative"><div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div></div></div>
-                <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 mb-5 text-xs text-orange-800"><i class="fa-regular fa-clock mr-1"></i><b>농장 진입 09:00–11:00</b> · 도착 30분 전 연락</div>
-
-                <div class="bg-gray-800 rounded-2xl p-4 text-white flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-green-300"></i><div class="flex-1"><p class="text-sm font-bold">5톤 윙바디 · 리프트 추천</p><p class="text-[10px] text-gray-400">내일 오전 상차 · 예상 운임 175,000원</p></div></div>
-            </main>
-            <div class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-4 pt-3 pb-4 z-20"><button class="w-full bg-green-600 text-white rounded-2xl py-4 font-bold text-sm">이 조건으로 사료 운송 요청하기</button></div>
         </div>
     </div>
 
@@ -1210,120 +1057,10 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- 화면 8 : 화주(축산농가) 오더 등록 — 퇴비·축분 -->
-    <!-- ============================================================ -->
-    <div class="screen-col" id="screen5">
-        <div class="screen-label"><span class="num">12</span>화주 오더 등록 — 퇴비·축분 (오염 화물)</div>
-        <div class="mobile-mockup flex flex-col">
-            <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
-                <i class="fa-solid fa-arrow-left text-gray-500"></i>
-                <h1 class="text-lg font-bold text-gray-800">운송 요청하기</h1>
-            </header>
-            <main class="flex-1 overflow-y-auto hide-scrollbar px-6 py-5 pb-32">
-
-                <!-- 품목 선택 : 퇴비·축분 선택됨 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">무엇을 보내시나요?</p>
-                <div class="flex flex-wrap gap-2 mb-2">
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">🌾 곡물(벼·쌀)</button>
-                    <button class="px-4 py-2.5 bg-amber-700 text-white rounded-xl text-sm font-bold">💩 퇴비·축분</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">🧪 비료</button>
-                    <button class="px-4 py-2.5 bg-white border border-gray-200 text-gray-600 rounded-xl text-sm">🐄 사료</button>
-                </div>
-
-                <!-- 오염 화물 안내 -->
-                <div class="bg-amber-50 border border-amber-300 rounded-xl p-3.5 mb-5">
-                    <p class="text-sm font-bold text-amber-800"><i class="fa-solid fa-triangle-exclamation mr-1"></i>오염 주의 화물로 분류됩니다</p>
-                    <p class="text-xs text-amber-700 mt-1 leading-relaxed">운반 차량에 퇴비 이력이 기록되며, 방수포(갑바) 덮개가 필수입니다. 덤프·암롤 차량이 우선 매칭됩니다.</p>
-                </div>
-
-                <!-- 적재 형태 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">어떤 상태인가요?</p>
-                <div class="grid grid-cols-3 gap-2 mb-5">
-                    <button class="flex flex-col items-center gap-1 py-3 bg-amber-50 border-2 border-amber-600 rounded-xl">
-                        <i class="fa-solid fa-mound text-amber-700"></i>
-                        <span class="text-xs font-bold text-amber-800">벌크(덤프)</span>
-                    </button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
-                        <i class="fa-solid fa-sack-xmark text-gray-400"></i>
-                        <span class="text-xs text-gray-500">톤백</span>
-                    </button>
-                    <button class="flex flex-col items-center gap-1 py-3 bg-white border border-gray-200 rounded-xl">
-                        <i class="fa-solid fa-bag-shopping text-gray-400"></i>
-                        <span class="text-xs text-gray-500">포대</span>
-                    </button>
-                </div>
-
-                <!-- 상차지 : 축사 퇴비사 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">상차지</p>
-                <div class="bg-white rounded-2xl border border-gray-200 p-3.5 mb-4">
-                    <p class="text-sm font-bold text-gray-800">충남 홍성군 ○○축산 퇴비사</p>
-                    <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-circle-check text-green-500 mr-1"></i>로더(상차 장비) 있음 · 대형차 진입 가능</p>
-                </div>
-
-                <!-- 하차 방식 -->
-                <p class="text-sm font-bold text-gray-700 mb-2">하차는 어떻게 하나요?</p>
-                <div class="flex gap-2 mb-4">
-                    <button class="flex-1 py-3 bg-amber-50 border-2 border-amber-600 rounded-xl text-sm font-bold text-amber-800">덤프 하차</button>
-                    <button class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">살포기 살포</button>
-                    <button class="flex-1 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-500">로더 하차</button>
-                </div>
-
-                <!-- 차량 구분 (특수 고정) -->
-                <p class="text-sm font-bold text-gray-700 mb-2">어떤 차량이 필요한가요?</p>
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 mb-3 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-bold text-amber-800"><i class="fa-solid fa-truck-monster mr-1"></i>특수 차량 (덤프·암롤)</p>
-                        <p class="text-xs text-amber-700 mt-0.5">퇴비·축분 벌크는 특수 차량만 배차됩니다</p>
-                    </div>
-                    <i class="fa-solid fa-lock text-amber-400"></i>
-                </div>
-                <div class="grid grid-cols-3 gap-2 mb-5">
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">11톤</button>
-                    <button class="py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-500">18톤</button>
-                    <button class="py-2.5 bg-amber-50 border-2 border-amber-600 rounded-xl text-xs font-bold text-amber-800">25톤</button>
-                </div>
-
-                <!-- 계근 정산 -->
-                <div class="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-3.5 mb-5">
-                    <div class="flex-1 pr-2">
-                        <p class="text-sm font-bold text-gray-700">계근소 경유 — 톤당 정산</p>
-                        <p class="text-xs text-gray-500 mt-0.5">계량증명서 기준 15,000원/톤으로 정산됩니다</p>
-                    </div>
-                    <div class="w-11 h-6 bg-brand-600 rounded-full relative flex-shrink-0">
-                        <div class="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow"></div>
-                    </div>
-                </div>
-
-                <!-- 예상 운임 -->
-                <div class="bg-gray-800 rounded-2xl p-4 text-white flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-gray-400">예상 운임 (약 18톤 기준)</p>
-                        <p class="text-2xl font-bold mt-0.5">270,000<span class="text-sm font-medium">원</span></p>
-                    </div>
-                    <button class="bg-brand-500 px-5 py-3 rounded-xl font-bold text-sm">요청하기</button>
-                </div>
-            </main>
-
-            <!-- 전화/카카오톡 접수 안내 -->
-            <div class="absolute bottom-0 w-full bg-white border-t border-gray-100 px-4 pt-3 pb-4 z-20">
-                <p class="text-center text-xs text-gray-500 mb-2 font-medium">앱이 어려우시면 편한 방법으로 문의하세요</p>
-                <div class="flex gap-2">
-                    <button class="flex-1 bg-[#FEE500] text-[#191919] rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-comment"></i>카카오톡 문의
-                    </button>
-                    <button class="flex-1 bg-green-600 text-white rounded-xl py-3.5 font-bold text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-phone"></i>전화 1588-0000
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
     <!-- 화면 9 : 차주 오더 상세 — 퇴비·축분 -->
     <!-- ============================================================ -->
     <div class="screen-col" id="screen6">
-        <div class="screen-label"><span class="num">13</span>차주 오더 상세 — 퇴비 이력 경고 + 톤당 정산</div>
+        <div class="screen-label"><span class="num">12</span>차주 오더 상세 — 퇴비 이력 경고 + 톤당 정산</div>
         <div class="mobile-mockup flex flex-col">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>
@@ -1399,7 +1136,7 @@
     <!-- 화면 10 : 차주 차량 설정 — 운송 가능 화물 관리 -->
     <!-- ============================================================ -->
     <div class="screen-col" id="screen-vehicle-settings">
-        <div class="screen-label"><span class="num">14</span>차주 차량 설정 — 운송 가능 화물 (LMO·위험물)</div>
+        <div class="screen-label"><span class="num">13</span>차주 차량 설정 — 운송 가능 화물 (LMO·위험물)</div>
         <div class="mobile-mockup flex flex-col">
             <header class="bg-white px-6 pt-10 pb-4 shadow-sm z-10 flex items-center gap-3">
                 <i class="fa-solid fa-arrow-left text-gray-500"></i>

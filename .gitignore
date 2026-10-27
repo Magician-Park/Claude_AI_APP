@@ -3,3 +3,9 @@
 
 # macOS
 .DS_Store
+
+# Flutter generated caches and build outputs
+.dart_tool/
+build/
+.flutter-plugins-dependencies
+coverage/

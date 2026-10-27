@@ -7,7 +7,7 @@
 ## 코드 표면
 
 - `app/lib/`: Flutter 실제 앱. 제품 기능을 구현할 때 우선 수정한다.
-- `farm-cargo-mockups.html`: 16개 핵심 화면의 전체 설계 보드.
+- `farm-cargo-mockups.html`: 13개 핵심 화면의 전체 설계 보드.
 - `app-demo.html`: 브라우저에서 클릭할 수 있는 PWA 데모.
 - `index.html`, `workspace.css`, `workspace.js`: 프롬프트와 데모를 나란히 보여주는 로컬 개발 워크스페이스.
 - `scripts/dev-server.mjs`: 외부 패키지가 필요 없는 로컬 서버.

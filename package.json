@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node scripts/dev-server.mjs",
     "dev": "node scripts/dev-server.mjs",
-    "check": "node --check workspace.js && node --check scripts/dev-server.mjs"
+    "check": "node --check workspace.js && node --check transport-categories.js && node --check scripts/dev-server.mjs"
   },
   "engines": {
     "node": ">=20"

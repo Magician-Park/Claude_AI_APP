@@ -1,0 +1,11 @@
+.cargo-selector { margin-bottom: 24px; color: #1f2937; }
+.cargo-selector h2 { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+.cargo-selector p { margin: 6px 0 12px; font-size: 12px; line-height: 1.6; color: #6b7280; }
+.cargo-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+.cargo-options button { min-height: 56px; padding: 10px; border: 1px solid #d1d5db; border-radius: 12px; background: #fff; color: #374151; font: inherit; font-size: 12px; font-weight: 700; text-align: left; cursor: pointer; }
+.cargo-options button[aria-pressed="true"] { border: 2px solid #2563eb; padding: 9px; background: #eff6ff; color: #1d4ed8; }
+.cargo-selector label { display: block; margin-top: 14px; font-size: 12px; font-weight: 700; }
+.cargo-selector select, .cargo-selector input { display: block; box-sizing: border-box; width: 100%; min-height: 46px; margin-top: 6px; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px; background: #fff; color: #1f2937; font: inherit; font-size: 13px; }
+.cargo-selector button:focus-visible, .cargo-selector input:focus-visible, .cargo-selector select:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+.cargo-selector .cargo-summary { padding: 12px; border: 1px solid #bfdbfe; border-radius: 12px; background: #eff6ff; color: #1e40af; overflow-wrap: anywhere; }
+[data-submit-transport]:disabled { background: #6b7280; opacity: .6; cursor: not-allowed; }

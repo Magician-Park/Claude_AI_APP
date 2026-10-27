@@ -27,18 +27,21 @@ npm start
 ├── index.html                  # 개발 워크스페이스
 ├── workspace.css              # 워크스페이스 UI와 반응형 레이아웃
 ├── workspace.js               # 프롬프트 기록, 미리보기 전환, 리사이저
+├── transport-categories.*     # 데모·설계 보드의 공통 화물 선택 UI
 ├── scripts/dev-server.mjs     # 무의존성 로컬 정적 서버
 ├── farm-cargo-mockups.html    # 전체 핵심 화면 설계
 ├── app-demo.html              # 클릭 가능한 PWA 시연
 ├── manifest.json / sw.js      # PWA 설정
 └── app/
     ├── lib/                   # Flutter 실제 앱 소스
+    ├── assets/cargo_catalog.json # 앱·데모에서 함께 사용하는 화물 분류
+    ├── test/                  # 화물 분류·요청 및 기존 오더 이동 테스트
     └── pubspec.yaml           # Flutter 의존성과 앱 설정
 ```
 
 ## Flutter 앱 실행
 
-현재 저장소에는 Flutter 소스와 의존성 선언만 포함되어 있습니다. 웹 플랫폼 구성이 없는 작업 환경에서는 먼저 `app`에서 `flutter create --platforms=web --project-name=farm_cargo .`로 실행 구성을 준비하세요. 기존 `lib` 파일은 보존하고 생성 결과를 확인한 뒤 아래 명령을 실행합니다.
+현재 저장소에는 Flutter 소스·분류 데이터·테스트가 포함되어 있습니다. 웹 플랫폼 구성이 없는 작업 환경에서는 먼저 `app`에서 `flutter create --platforms=web --project-name=farm_cargo .`로 실행 구성을 준비하세요. 기존 `lib`, `assets`, `test`, `pubspec.yaml`은 보존하고 생성 결과를 확인한 뒤 아래 명령을 실행합니다.
 
 ```bash
 cd app
@@ -46,15 +49,24 @@ flutter pub get
 flutter run -d chrome
 ```
 
-기본 진입점은 `app/lib/main.dart`이며, 현재 차주 로비에서 오더 상세로 이동하는 흐름이 구현되어 있습니다.
+기본 진입점은 `app/lib/main.dart`입니다. 로비의 `운송 요청하기`에서 화물을 고르고 요청 내용을 확인할 수 있습니다. 저장한 요청은 현재 앱 실행 동안 로비에 표시됩니다. 실제 서버 배차나 영구 저장과는 연결되어 있지 않습니다.
+
+## 운송 화물 분류
+
+기존 곡물·퇴비·비료 탭을 화물 종류 → 관련 업체·거점 → 세부 분류 → 품목으로 교체했습니다.
+
+- 배합사료: 팜스코의 안성·정읍·칠곡·보령·제주 거점과 선진 군산공장
+- 원료·첨가제: 대상 군산공장의 사료용 아미노산·당류
+- 식품 원료·제분 부산물: 삼양사 아산공장의 밀가루·프리믹스·소맥피, SPC에 납품하는 밀가루 등 제빵 원료
+- 농산 원물: 국산 담뱃잎과 직접 입력하는 출하자·상차지
+
+SPC는 완제품 식품 출하가 아닌 제빵 원료 납품처로 표시하며, 실제 상차지와 SPC 납품 거점을 구분합니다. 소맥피는 삼양사 아산공장의 제분 부산물·사료 원료로 구분합니다. `app/assets/cargo_catalog.json`을 Flutter, 클릭 데모, 설계 보드가 함께 사용합니다. 분류를 바꾸면 이전 업체·품목 선택을 초기화합니다.
 
 ## 점검
 
 ```bash
 npm run check
-# Flutter 플랫폼 구성을 준비한 작업 환경에서:
 cd app && flutter analyze
-# test/에 테스트를 준비한 경우:
 flutter test
 ```
 

@@ -2,7 +2,7 @@ const previews = {
   design: {
     name: '전체 화면 설계',
     path: 'farm-cargo-mockups.html',
-    description: '16개 핵심 화면과 사용자 흐름',
+    description: '13개 핵심 화면과 사용자 흐름',
     title: '팜카고 전체 화면 설계 미리보기',
   },
   demo: {

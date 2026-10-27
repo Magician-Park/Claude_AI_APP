@@ -2,10 +2,28 @@ import 'package:flutter/material.dart';
 
 import 'detail_screen.dart';
 import 'order.dart';
+import 'cargo_catalog.dart';
+import 'transport_request_screen.dart';
 
 /// 차주 홈 로비. 오더 카드를 탭하면 상세 화면으로 Push 이동한다.
-class LobbyScreen extends StatelessWidget {
+class LobbyScreen extends StatefulWidget {
   const LobbyScreen({super.key});
+
+  @override
+  State<LobbyScreen> createState() => _LobbyScreenState();
+}
+
+class _LobbyScreenState extends State<LobbyScreen> {
+  final List<TransportRequest> _requests = [];
+
+  Future<void> _openRequest() async {
+    final request = await Navigator.push<TransportRequest>(context,
+        MaterialPageRoute(builder: (_) => const TransportRequestScreen()));
+    if (request != null && mounted)
+      setState(() {
+        _requests.insert(0, request);
+      });
+  }
 
   // 2. 리스트의 오더 클릭 → 상세 화면으로 Push
   void _openDetail(BuildContext context, Order order) {
@@ -68,13 +86,28 @@ class LobbyScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
+            OutlinedButton.icon(
+                onPressed: _openRequest,
+                icon: const Icon(Icons.local_shipping_outlined),
+                label: const Text('운송 요청하기')),
+            for (final request in _requests)
+              Card(
+                  child: ListTile(
+                title: Text(request.product),
+                subtitle: Text(
+                    '${request.category} · ${request.supplier}\n${request.origin}\n→ ${request.destination}'),
+                isThreeLine: true,
+              )),
+            const SizedBox(height: 16),
+
             const Text('추천 맞춤 오더',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
 
             // 오더 리스트
             for (final order in sampleOrders) ...[
-              _OrderCard(order: order, onTap: () => _openDetail(context, order)),
+              _OrderCard(
+                  order: order, onTap: () => _openDetail(context, order)),
               const SizedBox(height: 12),
             ],
           ],
@@ -158,5 +191,6 @@ class _Chip extends StatelessWidget {
   }
 }
 
-String _won(int n) => n.toString().replaceAllMapped(
-    RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},');
+String _won(int n) => n
+    .toString()
+    .replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]},');
